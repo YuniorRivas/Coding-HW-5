@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Class 5 walk through</title>
+    <style>
+        #container > div {
+            width: 200px;
+            height: 100px;
+            background-color: gray;
+        }
+
+        .blue {
+            border: 5px solid blue;
+        }
+
+        h2 {
+            font-family: 'Arial', sans-serif;
+            text-align: left;
+            font-size: 1em;
+            margin: 0;
+        }
+
+        #hover_div {
+            background-color: red;
+            height: 100px;
+            width: 100px;
+        }
+
+        .toggle_divs {
+            background-color: gray;
+            height: 100px;
+            width: 100px;
+            margin-top: 10px;
+        }
+
+        .button_container {
+            width: 100%;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .image_container {
+            flex-basis: calc(25% - 10px);
+            margin: 5px;
+            text-align: center; 
+            position: relative;
+            cursor: pointer;
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .border_class {
+            border: 5px solid gold;
+            box-sizing: border-box;
+        }
+
+        .bioContainer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.8);
+            width: 100%;
+        }
+
+        .no-display {
+            display: none;
+        }
+
+        .opacity-half {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button_container">
+        <input type="button" id="All" value="All">
+        <input type="button" id="Adjuncts" value="Adjuncts">
+        <input type="button" id="Professors" value="Professors">
+        <input type="button" id="Graphics" value="Graphics">
+        <input type="button" id="Data" value="Data">
+    </div>
+
+  <div class="container">
+    <div class="image_container adjunct data">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2023/12/JaclynJeffrey-Wilensky-400x600-bw.jpg">
+            <div class="bioContainer no-display">
+                <h2>Jaclyn Jeffrey-Wilensky</h2>
+            </div>
+        </div>
+
+        <div class="image_container adjunct graphics">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2023/12/RahulMukherjee-400x600-bw.jpg">
+            <div class="bioContainer no-display">
+                <h2>Rahul Mukherjee</h2>
+            </div>
+        </div>
+
+    <div class="image_container adjunct data">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2021/08/taylorEldridge-bw.jpg">
+            <div class="bioContainer no-display">
+                <h2>Taylor Eldridge</h2>
+            </div>
+        </div>
+
+    <div class="image_container adjunct data">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2021/08/Adrian-Garcia-Headshot-2018-bw.jpg">
+            <div class="bioContainer no-display">
+                <h2>Adrian Garcia</h2>
+            </div>
+        </div>
+
+    <div class="image_container professor data">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2014/09/Lam-Thuy-Vo-Feb.-2023-400x600-bw.jpeg">
+            <div class="bioContainer no-display">
+                <h2>Lam Thuy Vo</h2>
+            </div>
+        </div>
+
+        <div class="image_container adjunct graphics">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2021/03/alana-pipe-headshot-400x505-bw.jpeg">
+            <div class="bioContainer no-display">
+                <h2>Alana Pipe</h2>
+            </div>
+        </div>
+        <div class="image_container adjunct graphics">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2017/07/tc_mccarthy-copy-400x600-bw.jpeg">
+            <div class="bioContainer no-display">
+                <h2>TC McCarthy</h2>
+            </div>
+        </div>
+
+        <div class="image_container professor data">
+            <img src="https://www.journalism.cuny.edu/wp-content/uploads/2008/10/sandeep-headshot-400x400-400x400-bw.jpg">
+            <div class="bioContainer no-display">
+                <h2>Sandeep Junnarkar</h2>
+            </div>
+        </div>
+    </div>
+
+   <script>
+
+    let adjunctsButton = document.getElementById('Adjuncts');
+    let professorsButton = document.getElementById('Professors');
+    let allButton = document.getElementById('All');
+    let graphicsButton = document.getElementById('Graphics');
+    let dataButton = document.getElementById('Data');
+
+    function toggleDisplay(className, display) {
+        let elements = document.getElementsByClassName(className);
+        for (let element of elements) {
+            element.style.display = display ? '' : 'none';
+        }
+    }
+
+    adjunctsButton.addEventListener('click', () => {
+        toggleDisplay('professor', false);
+        toggleDisplay('adjunct', true);
+    });
+
+    professorsButton.addEventListener('click', () => {
+        toggleDisplay('adjunct', false);
+        toggleDisplay('professor', true);
+    });
+
+    allButton.addEventListener('click', () => {
+        toggleDisplay('adjunct', true);
+        toggleDisplay('professor', true);
+    });
+
+    graphicsButton.addEventListener('click', () => {
+        toggleDisplay('data', false);
+        toggleDisplay('graphics', true);
+    });
+
+    dataButton.addEventListener('click', () => {
+        toggleDisplay('graphics', false);
+        toggleDisplay('data', true);
+    });
+
+    let imageContainers = document.querySelectorAll('.image_container');
+    imageContainers.forEach(container => {
+        container.addEventListener('mouseenter', () => {
+            container.querySelector('img').classList.add('opacity-half');
+            container.querySelector('.bioContainer').classList.remove('no-display');
+        });
+        container.addEventListener('mouseleave', () => {
+            container.querySelector('img').classList.remove('opacity-half');
+            container.querySelector('.bioContainer').classList.add('no-display');
+        });
+        container.addEventListener('click', function() {
+            imageContainers.forEach((cont) => cont.classList.remove('border_class'));
+            this.classList.add('border_class');
+        });
+    });
+
+</script>
+
+</body>
+
+</html>
